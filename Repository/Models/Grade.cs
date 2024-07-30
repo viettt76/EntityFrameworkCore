@@ -2,9 +2,13 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace HoangQuocViet.Models
+namespace Repository.Models
 {
+    [Table("Grade")]
     public partial class Grade
     {
         public Grade()
@@ -12,9 +16,13 @@ namespace HoangQuocViet.Models
             Students = new HashSet<Student>();
         }
 
+        [Key]
         public int GradeId { get; set; }
+        [Required]
+        [StringLength(50)]
         public string GradeName { get; set; }
 
+        [InverseProperty("Grade")]
         public virtual ICollection<Student> Students { get; set; }
     }
 }

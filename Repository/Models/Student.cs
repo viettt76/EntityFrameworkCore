@@ -2,16 +2,27 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace HoangQuocViet.Models
+namespace Repository.Models
 {
+    [Table("Student")]
     public partial class Student
     {
+        [Key]
         public int StudentId { get; set; }
+        [Required]
+        [StringLength(50)]
         public string FirstName { get; set; }
+        [Required]
+        [StringLength(50)]
         public string LastName { get; set; }
         public int? GradeId { get; set; }
 
+        [ForeignKey("GradeId")]
+        [InverseProperty("Students")]
         public virtual Grade Grade { get; set; }
     }
 }
